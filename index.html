@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Une aventure pour Jessica</title>
+
+  <style>
+    :root {
+      --fond: #111113;
+      --surface: #1c1b20;
+      --blanc: #f5f0ed;
+      --rose: #d9a6b0;
+      --rouge: #bd5967;
+      --texte-doux: #bdb5b5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(ellipse at top, #302126 0%, transparent 55%),
+        var(--fond);
+      color: var(--blanc);
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding: 35px 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page.active {
+      display: flex;
+      animation: apparition 0.45s ease;
+    }
+
+    .contenu {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      margin: auto;
+    }
+
+    .surtitre {
+      color: var(--rose);
+      font: 12px Arial, sans-serif;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 68px);
+      line-height: 1.08;
+      font-weight: normal;
+      margin: 0 0 24px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: normal;
+      margin: 0 0 22px;
+    }
+
+    p {
+      color: var(--texte-doux);
+      font: 16px/1.8 Arial, sans-serif;
+    }
+
+    .intro {
+      max-width: 470px;
+      margin: 0 auto 35px;
+    }
+
+    .ornement {
+      color: var(--rouge);
+      font-size: 35px;
+      margin-bottom: 25px;
+    }
+
+    .bouton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 24px;
+      border: 1px solid var(--rose);
+      border-radius: 40px;
+      background: var(--rose);
+      color: #191417;
+      font: bold 14px Arial, sans-serif;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .bouton:hover {
+      transform: translateY(-2px);
+      background: #edc5cc;
+    }
+
+    .bouton-secondaire {
+      background: transparent;
+      color: var(--blanc);
+      border-color: #514148;
+      margin-top: 12px;
+    }
+
+    .carte {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 30px;
+      border: 1px solid #403039;
+      border-radius: 20px;
+      background: rgba(28, 27, 32, 0.9);
+      text-align: left;
+    }
+
+    .regle {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin: 22px 0;
+    }
+
+    .numero {
+      flex: 0 0 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--rose);
+      border: 1px solid #76505c;
+      font: 14px Arial, sans-serif;
+    }
+
+    .regle strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      font-weight: normal;
+    }
+
+    .regle p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .objets {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .objet {
+      min-height: 115px;
+      border-radius: 16px;
+      border: 1px solid #45313a;
+      background: var(--surface);
+      color: var(--blanc);
+      font-size: 35px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .objet:hover {
+      transform: translateY(-4px);
+      border-color: var(--rose);
+    }
+
+    .objet small {
+      display: block;
+      margin-top: 10px;
+      font: 11px Arial, sans-serif;
+      color: var(--texte-doux);
+    }
+
+    .objet.trouve {
+      border-color: #9ebaa3;
+      background: #202a24;
+    }
+
+    .code {
+      color: var(--rose);
+      font-size: 28px;
+      letter-spacing: 8px;
+      min-height: 42px;
+      margin: 15px 0;
+    }
+
+    input {
+      width: 100%;
+      max-width: 300px;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #57434c;
+      border-radius: 10px;
+      outline: none;
+      background: #171619;
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    input:focus {
+      border-color: var(--rose);
+    }
+
+    .message {
+      min-height: 25px;
+      font-size: 14px;
+      color: var(--rose);
+    }
+
+    .petit {
+      font-size: 12px;
+      color: #8e858a;
+    }
+
+    @keyframes apparition {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 420px) {
+      .objets {
+        gap: 8px;
+      }
+
+      .objet {
+        min-height: 95px;
+        font-size: 29px;
+      }
+
+      .carte {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 : ACCUEIL -->
+  <section class="page active" id="accueil">
+    <div class="contenu">
+      <div class="surtitre">Une petite aventure rien que pour toi</div>
+      <div class="ornement">✳</div>
+      <h1>Jessica,<br>à toi de jouer.</h1>
+      <p class="intro">
+        J'ai préparé quelque chose pour toi.
+        Quelques mystères, quelques souvenirs et une surprise
+        qui t'attend au bout du chemin.
+      </p>
+      <button class="bouton" onclick="allerA('regles')">
+        Commencer l'aventure <span>♥</span>
+      </button>
+      <p class="petit" style="margin-top: 35px;">
+        Prends ton temps. Chaque détail compte.
+      </p>
+    </div>
+  </section>
+
+  <!-- PAGE 2 : RÈGLES -->
+  <section class="page" id="regles">
+    <div class="contenu">
+      <div class="surtitre">Avant de commencer</div>
+      <h2>Quelques petites règles</h2>
+      <p class="intro">
+        Pour arriver jusqu'à la fin, il va falloir observer,
+        chercher et peut-être te souvenir de certaines choses.
+      </p>
+
+      <div class="carte">
+        <div class="regle">
+          <div class="numero">1</div>
+          <div>
+            <strong>Ouvre l'œil</strong>
+            <p>Certains objets cachent quelque chose. Clique dessus pour le découvrir.</p>
+          </div>
+        </div>
+
+        <div class="regle">
+          <div class="numero">2</div>
+          <div>
+            <strong>Récupère les indices</strong>
+            <p>Les bons objets te donneront des lettres. Garde-les précieusement.</p>
+          </div>
+        </div>
+
+        <div class="regle">
+          <div class="numero">3</div>
+          <div>
+            <strong>Trouve le code</strong>
+            <p>Les lettres récupérées te permettront de débloquer la suite de l'aventure.</p>
+          </div>
+        </div>
+
+        <div class="regle">
+          <div class="numero">4</div>
+          <div>
+            <strong>Va jusqu'au bout</strong>
+            <p>Plusieurs petites épreuves t'attendent avant la surprise finale.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="bouton" onclick="allerA('jeu1')">
+        C'est parti <span>→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- PAGE 3 : PREMIER JEU -->
+  <section class="page" id="jeu1">
+    <div class="contenu">
+      <div class="surtitre">Épreuve numéro 1</div>
+      <h2>Les objets mystérieux</h2>
+      <p class="intro">
+        Six objets se trouvent devant toi.
+        Certains cachent une lettre. À toi de découvrir lesquels.
+      </p>
+
+      <div class="objets" id="objets">
+        <button class="objet" data-id="0" onclick="cliquerObjet(0)" aria-label="Examiner la clé">
+          🗝️<small>La clé</small>
+        </button>
+        <button class="objet" data-id="1" onclick="cliquerObjet(1)" aria-label="Examiner le livre">
+          📖<small>Le livre</small>
+        </button>
+        <button class="objet" data-id="2" onclick="cliquerObjet(2)" aria-label="Examiner la fleur">
+          🌷<small>La fleur</small>
+        </button>
+        <button class="objet" data-id="3" onclick="cliquerObjet(3)" aria-label="Examiner la lune">
+          🌙<small>La lune</small>
+        </button>
+        <button class="objet" data-id="4" onclick="cliquerObjet(4)" aria-label="Examiner l'appareil photo">
+          📷<small>La photo</small>
+        </button>
+        <button class="objet" data-id="5" onclick="cliquerObjet(5)" aria-label="Examiner le cadeau">
+          🎁<small>Le cadeau</small>
+        </button>
+      </div>
+
+      <p>Les lettres trouvées :</p>
+      <div class="code" id="lettres">_ _ _</div>
+      <p id="indice" class="message" aria-live="polite">
+        Trois lettres sont cachées parmi les objets.
+      </p>
+
+      <div style="margin-top: 25px;">
+        <p>Quand tu penses avoir trouvé, entre le code :</p>
+        <input id="saisieCode" type="text" maxlength="3"
+          placeholder="CODE" autocomplete="off" aria-label="Code secret">
+        <br>
+        <button class="bouton" onclick="verifierCode()">Valider le code</button>
+        <p id="erreurCode" class="message" aria-live="polite"></p>
+      </div>
+
+      <button class="bouton bouton-secondaire" onclick="allerA('regles')">
+        Revoir les règles
+      </button>
+    </div>
+  </section>
+
+  <!-- PAGE 4 : PROVISOIRE -->
+  <section class="page" id="suite">
+    <div class="contenu">
+      <div class="surtitre">Première épreuve terminée</div>
+      <h1>Bien joué, Jessica.</h1>
+      <p class="intro">
+        Tu as trouvé le premier code.
+        La suite de l'aventure sera bientôt prête.
+      </p>
+      <div class="ornement">✳</div>
+      <p class="petit">La prochaine étape reste à inventer ensemble.</p>
+    </div>
+  </section>
+
+  <script>
+    // Navigation entre les différentes pages
+    function allerA(id) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Les trois objets qui cachent une lettre.
+    // Le code provisoire est : L U N
+    const indices = {
+      0: { lettre: 'L', message: 'Une première lettre : L.' },
+      2: { lettre: 'U', message: 'Une deuxième lettre : U.' },
+      3: { lettre: 'N', message: 'Une troisième lettre : N.' }
+    };
+
+    const trouves = new Set();
+
+    function cliquerObjet(id) {
+      const bouton = document.querySelector(
+        '.objet[data-id="' + id + '"]'
+      );
+      const indice = indices[id];
+
+      if (!indice) {
+        document.getElementById('indice').textContent =
+          'Rien ici... Essaie un autre objet.';
+        return;
+      }
+
+      if (trouves.has(id)) {
+        document.getElementById('indice').textContent =
+          'Tu as déjà trouvé cette lettre !';
+        return;
+      }
+
+      trouves.add(id);
+      bouton.classList.add('trouve');
+      bouton.querySelector('small').textContent = indice.lettre;
+
+      document.getElementById('lettres').textContent =
+        Array.from(trouves)
+          .map(numero => indices[numero].lettre)
+          .join('  ');
+
+      document.getElementById('indice').textContent = indice.message;
+
+      if (trouves.size === 3) {
+        document.getElementById('indice').textContent =
+          'Tu as trouvé les trois lettres. Remets-les dans le bon ordre !';
+      }
+    }
+
+    function verifierCode() {
+      const code = document.getElementById('saisieCode')
+        .value.trim().toUpperCase();
+
+      const message = document.getElementById('erreurCode');
+
+      if (trouves.size !== 3) {
+        message.textContent =
+          'Explore les objets et récupère les trois lettres avant de continuer.';
+        return;
+      }
+
+      if (code === 'LUN') {
+        allerA('suite');
+      } else {
+        message.textContent =
+          'Ce n’est pas le bon code. Essaie un autre ordre de lettres.';
+      }
+    }
+
+    document.getElementById('saisieCode').addEventListener(
+      'keydown',
+      function(e) {
+        if (e.key === 'Enter') verifierCode();
+      }
+    );
+  </script>
+
+</body>
+</html>
