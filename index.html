@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jessica — Un petit jeu pour toi</title>
+
 <style>
 :root {
   --bg: #100e11;
@@ -13,7 +14,9 @@
   --rose: #e9a2b2;
   --border: #49333d;
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -24,6 +27,7 @@ body {
   color: var(--text);
   font-family: Georgia, "Times New Roman", serif;
 }
+
 button, input { font: inherit; }
 button { cursor: pointer; }
 
@@ -34,16 +38,19 @@ button { cursor: pointer; }
   align-items: center;
   justify-content: center;
 }
+
 .page.active {
   display: flex;
   animation: appear .45s ease;
 }
+
 .content {
   width: 100%;
   max-width: 850px;
   margin: auto;
   text-align: center;
 }
+
 .eyebrow {
   color: var(--rose);
   text-transform: uppercase;
@@ -51,23 +58,31 @@ button { cursor: pointer; }
   font: 11px Arial, sans-serif;
   margin-bottom: 20px;
 }
+
 h1 {
   font-size: clamp(36px, 7vw, 62px);
   line-height: 1.12;
   font-weight: normal;
   margin: 0 0 22px;
 }
+
 h2 {
   font-size: clamp(29px, 5vw, 42px);
   font-weight: normal;
   margin: 0 0 20px;
 }
+
 p {
   color: var(--muted);
   font-size: 17px;
   line-height: 1.8;
 }
-.intro { max-width: 540px; margin: 0 auto 28px; }
+
+.intro {
+  max-width: 540px;
+  margin: 0 auto 28px;
+}
+
 .decorations {
   display: flex;
   justify-content: center;
@@ -76,9 +91,18 @@ p {
   margin: 24px 0;
   color: var(--rose);
 }
-.decorations span:nth-child(1) { font-size: 24px; transform: rotate(-18deg); }
+
+.decorations span:nth-child(1) {
+  font-size: 24px;
+  transform: rotate(-18deg);
+}
+
 .decorations span:nth-child(2) { font-size: 37px; }
-.decorations span:nth-child(3) { font-size: 21px; transform: rotate(15deg); }
+
+.decorations span:nth-child(3) {
+  font-size: 21px;
+  transform: rotate(15deg);
+}
 
 .button {
   border: 1px solid var(--rose);
@@ -89,8 +113,17 @@ p {
   font-size: 15px;
   transition: background .25s, transform .25s;
 }
-.button:hover { transform: translateY(-2px); background: #f5bdca; }
-.button.secondary { background: transparent; color: var(--text); border-color: var(--border); }
+
+.button:hover {
+  transform: translateY(-2px);
+  background: #f5bdca;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
 
 .rules-card {
   max-width: 600px;
@@ -101,10 +134,16 @@ p {
   border-radius: 20px;
   text-align: left;
 }
-.rules-card p { margin: 10px 0; }
-.game-intro { max-width: 620px; margin: 0 auto 12px; }
 
-/* Jeu : espace ouvert, objets dispersés */
+.rules-card p { margin: 10px 0; }
+
+.game-intro {
+  max-width: 620px;
+  margin: 0 auto 12px;
+}
+
+/* Objets dispersés */
+
 .game-board {
   position: relative;
   width: 100%;
@@ -112,6 +151,7 @@ p {
   margin: 18px auto 8px;
   isolation: isolate;
 }
+
 .game-board::before {
   content: "";
   position: absolute;
@@ -120,6 +160,7 @@ p {
   pointer-events: none;
   z-index: -1;
 }
+
 .game-item {
   position: absolute;
   width: 126px;
@@ -137,13 +178,16 @@ p {
   transition: background .25s, border-color .25s, transform .25s;
   -webkit-tap-highlight-color: transparent;
 }
+
 .game-item:hover,
 .game-item:focus-visible {
   background: #e9a2b20c;
   border-color: #e9a2b226;
-  outline: none;
 }
-.game-item:focus-visible { outline: 1px solid var(--rose); }
+
+.game-item:focus-visible {
+  outline: 1px solid var(--rose);
+}
 
 .visual {
   width: 76px;
@@ -153,6 +197,7 @@ p {
   align-items: center;
   justify-content: center;
 }
+
 .face, .clue {
   position: absolute;
   inset: 0;
@@ -161,16 +206,19 @@ p {
   justify-content: center;
   transition: opacity .3s ease, transform .3s ease;
 }
+
 .face {
   opacity: 1;
   transform: scale(1) rotate(0);
 }
+
 .emoji {
   font-family: Arial, sans-serif;
   font-size: 48px;
   line-height: 1;
   filter: drop-shadow(0 5px 9px #0005);
 }
+
 .clue {
   opacity: 0;
   transform: scale(.86);
@@ -179,19 +227,23 @@ p {
   text-align: center;
   overflow-wrap: anywhere;
 }
+
 .game-item.revealed .face {
   opacity: 0;
   transform: scale(.75) rotate(-10deg);
 }
+
 .game-item.revealed .clue {
   opacity: 1;
   transform: scale(1);
 }
+
 .item-name {
   font: 12px Arial, sans-serif;
   letter-spacing: .3px;
   color: #d8cbd2;
 }
+
 .game-item.revealed .item-name { color: var(--rose); }
 
 .code-panel {
@@ -202,8 +254,18 @@ p {
   background: #1b171cbb;
   border-radius: 20px;
 }
-.code-panel p { margin-top: 0; font-size: 15px; }
-.code-entry { display: flex; gap: 9px; margin-top: 18px; }
+
+.code-panel p {
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.code-entry {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+}
+
 .code-entry input {
   min-width: 0;
   width: 100%;
@@ -216,19 +278,23 @@ p {
   letter-spacing: 3px;
   outline: none;
 }
+
 .code-entry input:focus { border-color: var(--rose); }
+
 .feedback {
   min-height: 24px;
   margin-top: 13px;
   font: 13px Arial, sans-serif;
   color: var(--rose);
 }
+
 .footer-note {
   margin-top: 25px;
   font: 11px Arial, sans-serif;
   letter-spacing: 1px;
   color: #9e8d97;
 }
+
 @keyframes appear {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -236,6 +302,7 @@ p {
 
 @media (max-width: 700px) {
   .page { padding: 28px 16px; }
+
   .game-board {
     height: auto;
     display: grid;
@@ -243,7 +310,9 @@ p {
     gap: 10px 8px;
     margin-top: 22px;
   }
+
   .game-board::before { display: none; }
+
   .game-item {
     position: relative;
     inset: auto !important;
@@ -253,15 +322,21 @@ p {
     min-height: 132px;
     transform: none !important;
   }
+
   .visual { width: 76px; height: 76px; }
+
   .game-item:hover { transform: translateY(-2px) !important; }
+
   .code-entry { flex-direction: column; }
+
   .code-entry .button { width: 100%; }
 }
+
 @media (max-width: 360px) {
   .emoji { font-size: 42px; }
   .item-name { font-size: 11px; }
 }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -270,40 +345,62 @@ p {
 }
 </style>
 </head>
+
 <body>
+
+<!-- PAGE D'ACCUEIL -->
 
 <section class="page active" id="home">
   <main class="content">
     <div class="eyebrow">Une petite aventure rien que pour toi</div>
+
     <h1>Jessica,<br>un petit jeu pour toi.</h1>
+
     <div class="decorations" aria-hidden="true">
       <span>✿</span><span>♡</span><span>❀</span>
     </div>
+
     <p class="intro">Prends ton temps, chaque détail compte.</p>
-    <button class="button" onclick="showPage('rules')">Commencer l'aventure</button>
+
+    <button class="button" type="button" onclick="showPage('rules')">
+      Commencer l'aventure
+    </button>
+
     <div class="footer-note">RIEN N'EST LÀ PAR HASARD</div>
   </main>
 </section>
 
+<!-- PAGE DES RÈGLES -->
+
 <section class="page" id="rules">
   <main class="content">
     <div class="eyebrow">Avant de commencer</div>
+
     <h2>Quelques petites règles</h2>
+
     <div class="rules-card">
       <p>✿ Ouvre bien les yeux et explore la page.</p>
       <p>✿ Clique sur les objets pour découvrir ce qu'ils cachent.</p>
       <p>✿ Certains objets ont quelque chose à révéler, d'autres non.</p>
       <p>✿ Garde les informations que tu trouves : elles pourraient servir plus tard.</p>
     </div>
-    <button class="button" onclick="showPage('game')">Découvrir le jeu</button>
+
+    <button class="button" type="button" onclick="showPage('game')">
+      Découvrir le jeu
+    </button>
+
     <p class="footer-note">LES RÈGLES POURRONT CHANGER POUR LES PROCHAINS JEUX</p>
   </main>
 </section>
 
+<!-- JEU NUMÉRO 1 -->
+
 <section class="page" id="game">
   <main class="content">
     <div class="eyebrow">Jeu numéro 1</div>
+
     <h2>À toi d'explorer.</h2>
+
     <p class="game-intro">
       Clique sur les objets pour découvrir ce qu'ils cachent.
       Reclique pour les retrouver.
@@ -311,15 +408,281 @@ p {
 
     <div class="game-board">
 
-      <button class="game-item" style="left:5%;top:3%;transform:rotate(-8deg)" data-item="09" onclick="reveal(this)" aria-label="Fleur, afficher ou masquer l'indice">
-        <span class="visual"><span class="face"><span class="emoji">🌸</span></span><span class="clue"></span></span>
+      <button class="game-item"
+        style="left:5%;top:3%;transform:rotate(-8deg)"
+        data-item="09"
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Fleur, afficher ou masquer l'indice">
+        <span class="visual">
+          <span class="face"><span class="emoji">🌸</span></span>
+          <span class="clue"></span>
+        </span>
         <span class="item-name">Fleur</span>
       </button>
 
-      <button class="game-item" style="left:37%;top:0%;transform:rotate(5deg)" data-item="11" onclick="reveal(this)" aria-label="Bague, afficher ou masquer l'indice">
-        <span class="visual"><span class="face"><span class="emoji">💍</span></span><span class="clue"></span></span>
+      <button class="game-item"
+        style="left:37%;top:0%;transform:rotate(5deg)"
+        data-item="11"
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Bague, afficher ou masquer l'indice">
+        <span class="visual">
+          <span class="face"><span class="emoji">💍</span></span>
+          <span class="clue"></span>
+        </span>
         <span class="item-name">Bague</span>
       </button>
 
-      <button class="game-item" style="left:72%;top:7%;transform:rotate(8deg)" data-item="24" onclick="reveal(this)" aria-label="Rafale, afficher ou masquer l'indice">
-        <span class="visual"><span class="face"><span class="emoji">✈️</span></span><span class
+      <button class="game-item"
+        style="left:72%;top:7%;transform:rotate(8deg)"
+        data-item="24"
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Rafale, afficher ou masquer l'indice">
+        <span class="visual">
+          <span class="face"><span class="emoji">✈️</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Rafale</span>
+      </button>
+
+      <button class="game-item"
+        style="left:20%;top:32%;transform:rotate(4deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Patate, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🥔</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Patate</span>
+      </button>
+
+      <button class="game-item"
+        style="left:53%;top:34%;transform:rotate(-5deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Mer, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🌊</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Mer</span>
+      </button>
+
+      <button class="game-item"
+        style="left:2%;top:66%;transform:rotate(-6deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Cœur, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">❤️</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Cœur</span>
+      </button>
+
+      <button class="game-item"
+        style="left:34%;top:73%;transform:rotate(6deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Porsche, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🏎️</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Porsche</span>
+      </button>
+
+      <button class="game-item"
+        style="left:68%;top:69%;transform:rotate(-4deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Top Gun, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🕶️</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Top Gun</span>
+      </button>
+
+      <button class="game-item"
+        style="left:1%;top:38%;transform:rotate(7deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Balatro, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🃏</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">Balatro</span>
+      </button>
+
+      <button class="game-item"
+        style="left:77%;top:39%;transform:rotate(5deg)"
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="The Weeknd, afficher ou masquer">
+        <span class="visual">
+          <span class="face"><span class="emoji">🎵</span></span>
+          <span class="clue"></span>
+        </span>
+        <span class="item-name">The Weeknd</span>
+      </button>
+
+    </div>
+
+    <div class="code-panel">
+      <p>
+        Tu as trouvé les trois indices ?
+        Assemble-les pour découvrir la date.
+      </p>
+
+      <form class="code-entry" onsubmit="checkCode(event)">
+        <input
+          id="codeInput"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="JJ / MM / AA"
+          aria-label="Entre la date découverte"
+          maxlength="10"
+          required
+        >
+
+        <button class="button" type="submit">Valider</button>
+      </form>
+
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <button class="button secondary" type="button"
+      style="margin-top:18px"
+      onclick="showPage('rules')">
+      Revoir les règles
+    </button>
+
+    <div class="footer-note">PRENDS TON TEMPS</div>
+  </main>
+</section>
+
+<!-- PAGE SUIVANTE -->
+
+<section class="page" id="next">
+  <main class="content">
+    <div class="eyebrow">Première étape terminée</div>
+
+    <h2>Tu as trouvé la date.</h2>
+
+    <div class="decorations" aria-hidden="true">
+      <span>✿</span><span>♡</span><span>❀</span>
+    </div>
+
+    <p class="intro">
+      Bien joué. Ce n'est que le début de l'aventure...
+    </p>
+
+    <div class="footer-note">LA SUITE ARRIVE BIENTÔT</div>
+  </main>
+</section>
+
+<!-- JAVASCRIPT -->
+
+<script>
+"use strict";
+
+/* Navigation entre les pages */
+function showPage(pageId) {
+  const target = document.getElementById(pageId);
+
+  if (!target) {
+    console.error("Page introuvable :", pageId);
+    return;
+  }
+
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  target.classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+/* Affichage et masquage des indices */
+function reveal(button) {
+  const isRevealed = button.classList.toggle("revealed");
+  const clue = button.querySelector(".clue");
+  const item = button.dataset.item || "";
+
+  if (isRevealed) {
+    if (item !== "") {
+      clue.textContent = item;
+      button.dataset.found = "true";
+    } else {
+      clue.textContent = "Il n’y a rien à trouver ici.";
+    }
+  } else {
+    clue.textContent = "";
+  }
+
+  button.setAttribute("aria-pressed", String(isRevealed));
+}
+
+/* Vérification de la date */
+function checkCode(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("codeInput");
+  const feedback = document.getElementById("feedback");
+
+  const digits = input.value.replace(/\D/g, "");
+
+  const clues = Array.from(
+    document.querySelectorAll(".game-item[data-item]")
+  ).filter(function(item) {
+    return item.dataset.item !== "";
+  });
+
+  const allCluesFound = clues.every(function(item) {
+    return item.dataset.found === "true";
+  });
+
+  if (!allCluesFound) {
+    feedback.textContent =
+      "Explore les objets et découvre les trois indices d’abord.";
+    return;
+  }
+
+  if (digits === "091124") {
+    feedback.textContent = "Exactement. Tu as trouvé !";
+
+    window.setTimeout(function() {
+      showPage("next");
+    }, 800);
+  } else {
+    feedback.textContent =
+      "Ce n’est pas la bonne date. Vérifie les trois indices.";
+  }
+}
+</script>
+
+</body>
+</html>
