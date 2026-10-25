@@ -13,23 +13,16 @@
   --rose: #e9a2b2;
   --border: #49333d;
 }
-
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 15% 10%, #39212d, transparent 38%),
-    radial-gradient(ellipse at 90% 85%, #26171e, transparent 35%),
-    var(--bg);
+  background: radial-gradient(ellipse at 15% 10%, #39212d, transparent 38%), radial-gradient(ellipse at 90% 85%, #26171e, transparent 35%), var(--bg);
   color: var(--text);
   font-family: Georgia, "Times New Roman", serif;
 }
-
 button, input { font: inherit; }
 button { cursor: pointer; }
-
 .page {
   display: none;
   min-height: 100vh;
@@ -37,19 +30,8 @@ button { cursor: pointer; }
   align-items: center;
   justify-content: center;
 }
-
-.page.active {
-  display: flex;
-  animation: appear .45s ease;
-}
-
-.content {
-  width: 100%;
-  max-width: 850px;
-  margin: auto;
-  text-align: center;
-}
-
+.page.active { display: flex; animation: appear .45s ease; }
+.content { width: 100%; max-width: 850px; margin: auto; text-align: center; }
 .eyebrow {
   color: var(--rose);
   text-transform: uppercase;
@@ -57,753 +39,285 @@ button { cursor: pointer; }
   font: 11px Arial, sans-serif;
   margin-bottom: 20px;
 }
-
-h1 {
-  font-size: clamp(36px, 7vw, 62px);
-  line-height: 1.12;
-  font-weight: normal;
-  margin: 0 0 22px;
-}
-
-h2 {
-  font-size: clamp(29px, 5vw, 42px);
-  font-weight: normal;
-  margin: 0 0 20px;
-}
-
-p {
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.8;
-}
-
-.intro {
-  max-width: 540px;
-  margin: 0 auto 28px;
-}
-
+h1 { font-size: clamp(36px, 7vw, 62px); line-height: 1.12; font-weight: normal; margin: 0 0 22px; }
+h2 { font-size: clamp(29px, 5vw, 42px); font-weight: normal; margin: 0 0 20px; }
+p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.intro { max-width: 540px; margin: 0 auto 28px; }
 .decorations {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  margin: 24px 0;
-  color: var(--rose);
+  display: flex; justify-content: center; align-items: center;
+  gap: 28px; margin: 24px 0; color: var(--rose);
 }
-
-.decorations span:nth-child(1) {
-  font-size: 24px;
-  transform: rotate(-18deg);
-}
-
+.decorations span:nth-child(1) { font-size: 24px; transform: rotate(-18deg); }
 .decorations span:nth-child(2) { font-size: 37px; }
-
-.decorations span:nth-child(3) {
-  font-size: 21px;
-  transform: rotate(15deg);
-}
-
+.decorations span:nth-child(3) { font-size: 21px; transform: rotate(15deg); }
 .button {
-  border: 1px solid var(--rose);
-  background: var(--rose);
-  color: #24131a;
-  padding: 15px 27px;
-  border-radius: 30px;
-  font-size: 15px;
+  border: 1px solid var(--rose); background: var(--rose); color: #24131a;
+  padding: 15px 27px; border-radius: 30px; font-size: 15px;
   transition: background .25s, transform .25s;
 }
-
-.button:hover {
-  transform: translateY(-2px);
-  background: #f5bdca;
-}
-
-.button.secondary {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-
+.button:hover { transform: translateY(-2px); background: #f5bdca; }
+.button.secondary { background: transparent; color: var(--text); border-color: var(--border); }
 .rules-card {
-  max-width: 600px;
-  margin: 25px auto;
-  padding: 26px;
-  background: #1b171cdd;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  text-align: left;
+  max-width: 600px; margin: 25px auto; padding: 26px;
+  background: #1b171cdd; border: 1px solid var(--border);
+  border-radius: 20px; text-align: left;
 }
-
 .rules-card p { margin: 10px 0; }
+.game-intro { max-width: 620px; margin: 0 auto 12px; }
 
-.game-intro {
-  max-width: 620px;
-  margin: 0 auto 12px;
-}
-
-/* Objets dispersés */
-
+/* JEU 1 */
 .game-board {
-  position: relative;
-  width: 100%;
-  height: 590px;
-  margin: 18px auto 8px;
-  isolation: isolate;
+  position: relative; width: 100%; height: 590px;
+  margin: 18px auto 8px; isolation: isolate;
 }
-
 .game-board::before {
-  content: "";
-  position: absolute;
-  inset: 8% 3%;
+  content: ""; position: absolute; inset: 8% 3%;
   background: radial-gradient(ellipse, #e9a2b208, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
+  pointer-events: none; z-index: -1;
 }
-
 .game-item {
-  position: absolute;
-  width: 126px;
-  min-height: 125px;
-  padding: 8px 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  color: var(--text);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 18px;
-  transition: background .25s, border-color .25s, transform .25s;
+  position: absolute; width: 126px; min-height: 125px; padding: 8px 4px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start; gap: 8px; color: var(--text);
+  background: transparent; border: 1px solid transparent;
+  border-radius: 18px; transition: background .25s, border-color .25s, transform .25s;
   -webkit-tap-highlight-color: transparent;
 }
-
-.game-item:hover,
-.game-item:focus-visible {
-  background: #e9a2b20c;
-  border-color: #e9a2b226;
-}
-
-.game-item:focus-visible {
-  outline: 1px solid var(--rose);
-}
-
-.visual {
-  width: 76px;
-  height: 76px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+.game-item:hover, .game-item:focus-visible { background: #e9a2b20c; border-color: #e9a2b226; }
+.game-item:focus-visible { outline: 1px solid var(--rose); }
+.visual { width: 76px; height: 76px; position: relative; display: flex; align-items: center; justify-content: center; }
 .face, .clue {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .3s ease, transform .3s ease;
+  position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; transition: opacity .3s ease, transform .3s ease;
 }
-
-.face {
-  opacity: 1;
-  transform: scale(1) rotate(0);
-}
-
-.emoji {
-  font-family: Arial, sans-serif;
-  font-size: 48px;
-  line-height: 1;
-  filter: drop-shadow(0 5px 9px #0005);
-}
-
-.clue {
-  opacity: 0;
-  transform: scale(.86);
-  color: var(--rose);
-  font: 20px Georgia, serif;
-  text-align: center;
-  overflow-wrap: anywhere;
-}
-
-.game-item.revealed .face {
-  opacity: 0;
-  transform: scale(.75) rotate(-10deg);
-}
-
-.game-item.revealed .clue {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.item-name {
-  font: 12px Arial, sans-serif;
-  letter-spacing: .3px;
-  color: #d8cbd2;
-}
-
+.face { opacity: 1; transform: scale(1) rotate(0); }
+.emoji { font-family: Arial, sans-serif; font-size: 48px; line-height: 1; filter: drop-shadow(0 5px 9px #0005); }
+.clue { opacity: 0; transform: scale(.86); color: var(--rose); font: 20px Georgia, serif; text-align: center; overflow-wrap: anywhere; }
+.game-item.revealed .face { opacity: 0; transform: scale(.75) rotate(-10deg); }
+.game-item.revealed .clue { opacity: 1; transform: scale(1); }
+.item-name { font: 12px Arial, sans-serif; letter-spacing: .3px; color: #d8cbd2; }
 .game-item.revealed .item-name { color: var(--rose); }
-
 .code-panel {
-  max-width: 450px;
-  margin: 15px auto 0;
-  padding: 24px;
-  border: 1px solid var(--border);
-  background: #1b171cbb;
-  border-radius: 20px;
+  max-width: 450px; margin: 15px auto 0; padding: 24px;
+  border: 1px solid var(--border); background: #1b171cbb; border-radius: 20px;
 }
-
-.code-panel p {
-  margin-top: 0;
-  font-size: 15px;
-}
-
-.code-entry {
-  display: flex;
-  gap: 9px;
-  margin-top: 18px;
-}
-
+.code-panel p { margin-top: 0; font-size: 15px; }
+.code-entry { display: flex; gap: 9px; margin-top: 18px; }
 .code-entry input {
-  min-width: 0;
-  width: 100%;
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px;
-  text-align: center;
-  letter-spacing: 3px;
-  outline: none;
+  min-width: 0; width: 100%; background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: 12px; padding: 13px;
+  text-align: center; letter-spacing: 3px; outline: none;
 }
-
 .code-entry input:focus { border-color: var(--rose); }
+.feedback { min-height: 24px; margin-top: 13px; font: 13px Arial, sans-serif; color: var(--rose); }
+.footer-note { margin-top: 25px; font: 11px Arial, sans-serif; letter-spacing: 1px; color: #9e8d97; }
+@keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-.feedback {
-  min-height: 24px;
-  margin-top: 13px;
-  font: 13px Arial, sans-serif;
-  color: var(--rose);
+/* JEU 2 */
+.quiz-list {
+  max-width: 720px; margin: 26px auto; display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; text-align: left;
 }
+.quiz-place { padding: 18px; border: 1px solid var(--border); border-radius: 18px; background: #1b171cbb; }
+.quiz-place h3 { margin: 0 0 14px; font-size: 21px; font-weight: normal; }
+.quiz-options { display: flex; flex-wrap: wrap; gap: 9px; }
+.quiz-options label {
+  flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+  gap: 7px; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 12px; color: var(--muted); font: 13px Arial, sans-serif; cursor: pointer;
+}
+.quiz-options label:has(input:checked) { border-color: var(--rose); color: var(--text); background: #e9a2b20d; }
+.quiz-options input { accent-color: var(--rose); }
+.quiz-feedback { min-height: 25px; margin: 15px auto; color: var(--rose); font: 14px Arial, sans-serif; }
 
-.footer-note {
-  margin-top: 25px;
-  font: 11px Arial, sans-serif;
-  letter-spacing: 1px;
-  color: #9e8d97;
+/* JEU 3 : PUZZLES */
+.puzzle-wrap { max-width: 760px; margin: 24px auto; }
+.puzzle-progress { color: var(--rose); font: 13px Arial, sans-serif; letter-spacing: 1px; margin: 12px 0 18px; }
+.puzzle-board {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px; width: min(100%, 520px); margin: 0 auto; padding: 5px;
+  border: 1px solid var(--border); border-radius: 14px;
+  background: #1b171c; overflow: hidden;
 }
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+.puzzle-piece {
+  min-width: 0; aspect-ratio: 1 / 1; border: 1px solid #ffffff24;
+  border-radius: 3px; padding: 0; background-repeat: no-repeat;
+  cursor: pointer; transition: border-color .15s, transform .15s, opacity .15s;
+  touch-action: manipulation;
 }
+.puzzle-piece.selected { border: 3px solid var(--rose); transform: scale(.96); box-shadow: 0 0 0 2px #e9a2b233; }
+.puzzle-piece:focus-visible { outline: 2px solid var(--rose); outline-offset: 1px; }
+.puzzle-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.puzzle-message { min-height: 28px; margin: 14px auto; color: var(--rose); font: 14px Arial, sans-serif; }
 
 @media (max-width: 700px) {
   .page { padding: 28px 16px; }
-
-  .game-board {
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px 8px;
-    margin-top: 22px;
-  }
-
+  .game-board { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 8px; margin-top: 22px; }
   .game-board::before { display: none; }
-
-  .game-item {
-    position: relative;
-    inset: auto !important;
-    left: auto !important;
-    top: auto !important;
-    width: 100%;
-    min-height: 132px;
-    transform: none !important;
-  }
-
+  .game-item { position: relative; inset: auto !important; left: auto !important; top: auto !important; width: 100%; min-height: 132px; transform: none !important; }
   .visual { width: 76px; height: 76px; }
-
   .game-item:hover { transform: translateY(-2px) !important; }
-
   .code-entry { flex-direction: column; }
-
   .code-entry .button { width: 100%; }
 }
-
-@media (max-width: 360px) {
-  .emoji { font-size: 42px; }
-  .item-name { font-size: 11px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-
-/* JEU NUMÉRO 2 : quiz des lieux */
-
-.quiz-list {
-  max-width: 720px;
-  margin: 26px auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  text-align: left;
-}
-
-.quiz-place {
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: #1b171cbb;
-}
-
-.quiz-place h3 {
-  margin: 0 0 14px;
-  font-size: 21px;
-  font-weight: normal;
-}
-
-.quiz-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-}
-
-.quiz-options label {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: var(--muted);
-  font: 13px Arial, sans-serif;
-  cursor: pointer;
-}
-
-.quiz-options label:has(input:checked) {
-  border-color: var(--rose);
-  color: var(--text);
-  background: #e9a2b20d;
-}
-
-.quiz-options input { accent-color: var(--rose); }
-
-.quiz-feedback {
-  min-height: 25px;
-  margin: 15px auto;
-  color: var(--rose);
-  font: 14px Arial, sans-serif;
-}
-
 @media (max-width: 600px) {
   .quiz-list { grid-template-columns: 1fr; }
+  .puzzle-board { gap: 2px; padding: 3px; }
+  .puzzle-piece { border-radius: 2px; }
+}
+@media (max-width: 360px) { .emoji { font-size: 42px; } .item-name { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE D'ACCUEIL -->
-
 <section class="page active" id="home">
   <main class="content">
     <div class="eyebrow">Une petite aventure rien que pour toi</div>
-
     <h1>Jessica,<br>un petit jeu pour toi.</h1>
-
-    <div class="decorations" aria-hidden="true">
-      <span>✿</span><span>♡</span><span>❀</span>
-    </div>
-
+    <div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
     <p class="intro">Prends ton temps, chaque détail compte.</p>
-
-    <button class="button" type="button" onclick="showPage('rules')">
-      Commencer l'aventure
-    </button>
-
+    <button class="button" type="button" onclick="showPage('rules')">Commencer l'aventure</button>
     <div class="footer-note">RIEN N'EST LÀ PAR HASARD</div>
   </main>
 </section>
 
-<!-- PAGE DES RÈGLES -->
-
 <section class="page" id="rules">
   <main class="content">
     <div class="eyebrow">Avant de commencer</div>
-
     <h2>Quelques petites règles</h2>
-
     <div class="rules-card">
       <p>✿ Ouvre bien les yeux et explore la page.</p>
       <p>✿ Clique sur les objets pour découvrir ce qu'ils cachent.</p>
       <p>✿ Certains objets ont quelque chose à révéler, d'autres non.</p>
       <p>✿ Garde les informations que tu trouves : elles pourraient servir plus tard.</p>
     </div>
-
-    <button class="button" type="button" onclick="showPage('game')">
-      Découvrir le jeu
-    </button>
-
+    <button class="button" type="button" onclick="showPage('game')">Découvrir le jeu</button>
     <p class="footer-note">LES RÈGLES POURRONT CHANGER POUR LES PROCHAINS JEUX</p>
   </main>
 </section>
 
-<!-- JEU NUMÉRO 1 -->
-
 <section class="page" id="game">
   <main class="content">
     <div class="eyebrow">Jeu numéro 1</div>
-
     <h2>À toi d'explorer.</h2>
-
-    <p class="game-intro">
-      Clique sur les objets pour découvrir ce qu'ils cachent.
-      Reclique pour les retrouver.
-    </p>
-
+    <p class="game-intro">Clique sur les objets pour découvrir ce qu'ils cachent. Reclique pour les retrouver.</p>
     <div class="game-board">
-
-      <button class="game-item"
-        style="left:5%;top:3%;transform:rotate(-8deg)"
-        data-item="09"
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Fleur, afficher ou masquer l'indice">
-        <span class="visual">
-          <span class="face"><span class="emoji">🌸</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Fleur</span>
-      </button>
-
-      <button class="game-item"
-        style="left:37%;top:0%;transform:rotate(5deg)"
-        data-item="11"
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Bague, afficher ou masquer l'indice">
-        <span class="visual">
-          <span class="face"><span class="emoji">💍</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Bague</span>
-      </button>
-
-      <button class="game-item"
-        style="left:72%;top:7%;transform:rotate(8deg)"
-        data-item="24"
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Rafale, afficher ou masquer l'indice">
-        <span class="visual">
-          <span class="face"><span class="emoji">✈️</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Rafale</span>
-      </button>
-
-      <button class="game-item"
-        style="left:20%;top:32%;transform:rotate(4deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Patate, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🥔</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Patate</span>
-      </button>
-
-      <button class="game-item"
-        style="left:53%;top:34%;transform:rotate(-5deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Mer, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🌊</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Mer</span>
-      </button>
-
-      <button class="game-item"
-        style="left:2%;top:66%;transform:rotate(-6deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Cœur, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">❤️</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Cœur</span>
-      </button>
-
-      <button class="game-item"
-        style="left:34%;top:73%;transform:rotate(6deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Porsche, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🏎️</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Porsche</span>
-      </button>
-
-      <button class="game-item"
-        style="left:68%;top:69%;transform:rotate(-4deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Top Gun, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🕶️</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Top Gun</span>
-      </button>
-
-      <button class="game-item"
-        style="left:1%;top:38%;transform:rotate(7deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="Balatro, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🃏</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">Balatro</span>
-      </button>
-
-      <button class="game-item"
-        style="left:77%;top:39%;transform:rotate(5deg)"
-        data-item=""
-        data-found="false"
-        type="button"
-        onclick="reveal(this)"
-        aria-label="The Weeknd, afficher ou masquer">
-        <span class="visual">
-          <span class="face"><span class="emoji">🎵</span></span>
-          <span class="clue"></span>
-        </span>
-        <span class="item-name">The Weeknd</span>
-      </button>
-
+      <button class="game-item" style="left:5%;top:3%;transform:rotate(-8deg)" data-item="09" data-found="false" type="button" onclick="reveal(this)" aria-label="Fleur, afficher ou masquer l'indice"><span class="visual"><span class="face"><span class="emoji">🌸</span></span><span class="clue"></span></span><span class="item-name">Fleur</span></button>
+      <button class="game-item" style="left:37%;top:0%;transform:rotate(5deg)" data-item="11" data-found="false" type="button" onclick="reveal(this)" aria-label="Bague, afficher ou masquer l'indice"><span class="visual"><span class="face"><span class="emoji">💍</span></span><span class="clue"></span></span><span class="item-name">Bague</span></button>
+      <button class="game-item" style="left:72%;top:7%;transform:rotate(8deg)" data-item="24" data-found="false" type="button" onclick="reveal(this)" aria-label="Rafale, afficher ou masquer l'indice"><span class="visual"><span class="face"><span class="emoji">✈️</span></span><span class="clue"></span></span><span class="item-name">Rafale</span></button>
+      <button class="game-item" style="left:20%;top:32%;transform:rotate(4deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Patate, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🥔</span></span><span class="clue"></span></span><span class="item-name">Patate</span></button>
+      <button class="game-item" style="left:53%;top:34%;transform:rotate(-5deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Mer, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🌊</span></span><span class="clue"></span></span><span class="item-name">Mer</span></button>
+      <button class="game-item" style="left:2%;top:66%;transform:rotate(-6deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Cœur, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">❤️</span></span><span class="clue"></span></span><span class="item-name">Cœur</span></button>
+      <button class="game-item" style="left:34%;top:73%;transform:rotate(6deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Porsche, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🏎️</span></span><span class="clue"></span></span><span class="item-name">Porsche</span></button>
+      <button class="game-item" style="left:68%;top:69%;transform:rotate(-4deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Top Gun, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🕶️</span></span><span class="clue"></span></span><span class="item-name">Top Gun</span></button>
+      <button class="game-item" style="left:1%;top:38%;transform:rotate(7deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="Balatro, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🃏</span></span><span class="clue"></span></span><span class="item-name">Balatro</span></button>
+      <button class="game-item" style="left:77%;top:39%;transform:rotate(5deg)" data-item="" data-found="false" type="button" onclick="reveal(this)" aria-label="The Weeknd, afficher ou masquer"><span class="visual"><span class="face"><span class="emoji">🎵</span></span><span class="clue"></span></span><span class="item-name">The Weeknd</span></button>
     </div>
-
     <div class="code-panel">
-      <p>
-        Tu as trouvé les trois indices ?
-        Assemble-les pour découvrir la date.
-      </p>
-
+      <p>Tu as trouvé les trois indices ? Assemble-les pour découvrir la date.</p>
       <form class="code-entry" onsubmit="checkCode(event)">
-        <input
-          id="codeInput"
-          type="text"
-          inputmode="numeric"
-          autocomplete="off"
-          placeholder="JJ / MM / AA"
-          aria-label="Entre la date découverte"
-          maxlength="10"
-          required
-        >
-
+        <input id="codeInput" type="text" inputmode="numeric" autocomplete="off" placeholder="JJ / MM / AA" aria-label="Entre la date découverte" maxlength="10" required>
         <button class="button" type="submit">Valider</button>
       </form>
-
       <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
     </div>
-
-    <button class="button secondary" type="button"
-      style="margin-top:18px"
-      onclick="showPage('rules')">
-      Revoir les règles
-    </button>
-
+    <button class="button secondary" type="button" style="margin-top:18px" onclick="showPage('rules')">Revoir les règles</button>
     <div class="footer-note">PRENDS TON TEMPS</div>
   </main>
 </section>
 
-<!-- PAGE SUIVANTE -->
-
 <section class="page" id="next">
   <main class="content">
     <div class="eyebrow">Première étape terminée</div>
-
     <h2>Tu as trouvé la date.</h2>
-
-    <div class="decorations" aria-hidden="true">
-      <span>✿</span><span>♡</span><span>❀</span>
-    </div>
-
-    <p class="intro">
-      Bien joué. Ce n'est que le début de l'aventure...
-    </p>
-
-    <button class="button" type="button" onclick="showPage('quiz2')">
-      Passer au jeu numéro 2
-    </button>
-
+    <div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
+    <p class="intro">Bien joué. Ce n'est que le début de l'aventure...</p>
+    <button class="button" type="button" onclick="showPage('quiz2')">Passer au jeu numéro 2</button>
     <div class="footer-note">UNE NOUVELLE ÉTAPE T'ATTEND</div>
   </main>
 </section>
-
-<!-- JEU NUMÉRO 2 : QUIZ DES LIEUX -->
 
 <section class="page" id="quiz2">
   <main class="content">
     <div class="eyebrow">Jeu numéro 2</div>
     <h2>Nos lieux, nos souvenirs.</h2>
-
-    <p class="game-intro">
-      Pour chaque lieu, choisis si nous y sommes déjà allés ou si c'est un endroit où nous prévoyons d'aller.
-    </p>
-
+    <p class="game-intro">Pour chaque lieu, choisis si nous y sommes déjà allés ou si c'est un endroit où nous prévoyons d'aller.</p>
     <form id="placesQuiz" onsubmit="checkPlacesQuiz(event)">
       <div class="quiz-list">
-
-        <article class="quiz-place">
-          <h3>🍝 Italie</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="italie" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="italie" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🌊 Biarritz</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="biarritz" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="biarritz" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🏄 Orres</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="hossegor" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="hossegor" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🌙 La Lune</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="lune" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="lune" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🏔️ Le Queyras</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="queyras" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="queyras" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🌴 Miami</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="miami" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="miami" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>☀️ Nice</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="nice" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="nice" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
-        <article class="quiz-place">
-          <h3>🗾 Japon</h3>
-          <div class="quiz-options">
-            <label><input type="radio" name="japon" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="japon" value="non"> On n'y est pas encore allé</label>
-          </div>
-        </article>
-
+        <article class="quiz-place"><h3>🍝 Italie</h3><div class="quiz-options"><label><input type="radio" name="italie" value="oui" required> On y est allés</label><label><input type="radio" name="italie" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🌊 Biarritz</h3><div class="quiz-options"><label><input type="radio" name="biarritz" value="oui" required> On y est allés</label><label><input type="radio" name="biarritz" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🏄 Hossegor</h3><div class="quiz-options"><label><input type="radio" name="hossegor" value="oui" required> On y est allés</label><label><input type="radio" name="hossegor" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🌙 La Lune</h3><div class="quiz-options"><label><input type="radio" name="lune" value="oui" required> On y est allés</label><label><input type="radio" name="lune" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🏔️ Le Queyras</h3><div class="quiz-options"><label><input type="radio" name="queyras" value="oui" required> On y est allés</label><label><input type="radio" name="queyras" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🌴 Miami</h3><div class="quiz-options"><label><input type="radio" name="miami" value="oui" required> On y est allés</label><label><input type="radio" name="miami" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>☀️ Nice</h3><div class="quiz-options"><label><input type="radio" name="nice" value="oui" required> On y est allés</label><label><input type="radio" name="nice" value="non"> On n'y est pas encore allé</label></div></article>
+        <article class="quiz-place"><h3>🗾 Japon</h3><div class="quiz-options"><label><input type="radio" name="japon" value="oui" required> On y est allés</label><label><input type="radio" name="japon" value="non"> On n'y est pas encore allé</label></div></article>
       </div>
-
       <button class="button" type="submit">Vérifier mes réponses</button>
       <div class="quiz-feedback" id="quizFeedback" role="status" aria-live="polite"></div>
     </form>
-
     <div class="footer-note">CHAQUE LIEU A SON HISTOIRE</div>
   </main>
 </section>
-
-<!-- PAGE APRÈS LE JEU NUMÉRO 2 -->
 
 <section class="page" id="quiz2next">
   <main class="content">
     <div class="eyebrow">Deuxième étape terminée</div>
     <h2>Tu connais bien nos aventures.</h2>
-
-    <div class="decorations" aria-hidden="true">
-      <span>✿</span><span>♡</span><span>❀</span>
-    </div>
-
+    <div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
     <p class="intro">Tout est juste. Tu peux passer à la suite...</p>
-    <div class="footer-note">LA SUITE ARRIVE BIENTÔT</div>
+    <button class="button" type="button" onclick="startPuzzleGame()">Découvrir le dernier jeu</button>
+    <div class="footer-note">UNE DERNIÈRE AVENTURE T’ATTEND</div>
   </main>
 </section>
 
-<!-- JAVASCRIPT -->
+<section class="page" id="puzzleGame">
+  <main class="content">
+    <div class="eyebrow">Jeu numéro 3</div>
+    <h2>Quelques souvenirs à reconstruire.</h2>
+    <p class="game-intro">Reconstitue les trois photos. Appuie sur deux pièces pour les échanger. Quand une photo est complète, tu pourras passer à la suivante.</p>
+    <div class="puzzle-wrap">
+      <div class="puzzle-progress" id="puzzleProgress">PHOTO 1 SUR 3</div>
+      <div class="puzzle-board" id="puzzleBoard" aria-label="Puzzle photo"></div>
+      <div class="puzzle-message" id="puzzleMessage" role="status" aria-live="polite">Choisis deux pièces pour les échanger.</div>
+      <div class="puzzle-actions">
+        <button class="button secondary" type="button" onclick="shuffleCurrentPuzzle()">Mélanger à nouveau</button>
+        <button class="button" id="puzzleNextButton" type="button" onclick="advancePuzzle()" hidden>Photo suivante</button>
+      </div>
+    </div>
+    <div class="footer-note">CHAQUE PIÈCE RETROUVE SA PLACE</div>
+  </main>
+</section>
+
+<section class="page" id="puzzleFinal">
+  <main class="content">
+    <div class="eyebrow">Dernière étape terminée</div>
+    <h2>Tu as tout reconstitué. ♡</h2>
+    <div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
+    <p class="intro">Bien joué, Jessica. Chaque pièce a retrouvé sa place.</p>
+    <div class="footer-note">FIN DE L’AVENTURE</div>
+  </main>
+</section>
 
 <script>
 "use strict";
 
-/* Navigation entre les pages */
-
 function showPage(pageId) {
   const target = document.getElementById(pageId);
-
-  if (!target) {
-    console.error("Page introuvable :", pageId);
-    return;
-  }
-
-  document.querySelectorAll(".page").forEach(function(page) {
-    page.classList.remove("active");
-  });
-
+  if (!target) { console.error("Page introuvable :", pageId); return; }
+  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
   target.classList.add("active");
   window.scrollTo(0, 0);
 }
-
-/* Affichage et masquage des indices */
 
 function reveal(button) {
   const isRevealed = button.classList.toggle("revealed");
   const clue = button.querySelector(".clue");
   const item = button.dataset.item || "";
-
   if (isRevealed) {
     if (item !== "") {
       clue.textContent = item;
@@ -814,53 +328,32 @@ function reveal(button) {
   } else {
     clue.textContent = "";
   }
-
   button.setAttribute("aria-pressed", String(isRevealed));
 }
 
-/* Vérification de la date */
-
 function checkCode(event) {
   event.preventDefault();
-
   const input = document.getElementById("codeInput");
   const feedback = document.getElementById("feedback");
-
   const digits = input.value.replace(/\D/g, "");
-
-  const clues = Array.from(
-    document.querySelectorAll(".game-item[data-item]")
-  ).filter(function(item) {
-    return item.dataset.item !== "";
-  });
-
-  const allCluesFound = clues.every(function(item) {
-    return item.dataset.found === "true";
-  });
+  const clues = Array.from(document.querySelectorAll(".game-item[data-item]"))
+    .filter(item => item.dataset.item !== "");
+  const allCluesFound = clues.every(item => item.dataset.found === "true");
 
   if (!allCluesFound) {
-    feedback.textContent =
-      "Explore les objets et découvre les trois indices d’abord.";
+    feedback.textContent = "Explore les objets et découvre les trois indices d’abord.";
     return;
   }
-
   if (digits === "091124") {
     feedback.textContent = "Exactement. Tu as trouvé !";
-
-    window.setTimeout(function() {
-      showPage("next");
-    }, 800);
+    window.setTimeout(() => showPage("next"), 800);
   } else {
-    feedback.textContent =
-      "Ce n’est pas la bonne date. Vérifie les trois indices.";
+    feedback.textContent = "Ce n’est pas la bonne date. Vérifie les trois indices.";
   }
 }
 
-/* Vérification du quiz numéro 2 */
-
 function checkPlacesQuiz(event) {
   event.preventDefault();
-
   const answers = {
     italie: "non",
     biarritz: "oui",
@@ -871,7 +364,6 @@ function checkPlacesQuiz(event) {
     nice: "oui",
     japon: "non"
   };
-
   const form = document.getElementById("placesQuiz");
   const feedback = document.getElementById("quizFeedback");
   const formData = new FormData(form);
@@ -880,15 +372,157 @@ function checkPlacesQuiz(event) {
   for (const [place, answer] of Object.entries(answers)) {
     if (formData.get(place) === answer) correct++;
   }
-
   if (correct === Object.keys(answers).length) {
     feedback.textContent = "Tout est juste. Bien joué !";
-
-    window.setTimeout(function() {
-      showPage("quiz2next");
-    }, 800);
+    window.setTimeout(() => showPage("quiz2next"), 800);
   } else {
     feedback.textContent = "Tu as " + correct + "/8 bonnes réponses. Réessaie !";
+  }
+}
+
+/* JEU NUMÉRO 3 : PUZZLES PHOTO */
+const puzzlePhotos = [
+  { src: "IMG_3743.jpeg", width: 1152, height: 1536 },
+  { src: "1000015084.jpeg", width: 1139, height: 1536 },
+  { src: "1000009686.jpeg", width: 1080, height: 2400 }
+];
+
+let currentPuzzle = 0;
+let puzzlePieces = [];
+let selectedPieceSlot = null;
+let puzzleSolved = false;
+
+function startPuzzleGame() {
+  currentPuzzle = 0;
+  showPage("puzzleGame");
+  loadPuzzle();
+}
+
+function loadPuzzle() {
+  const photo = puzzlePhotos[currentPuzzle];
+  const board = document.getElementById("puzzleBoard");
+  const nextButton = document.getElementById("puzzleNextButton");
+
+  selectedPieceSlot = null;
+  puzzleSolved = false;
+  nextButton.hidden = true;
+  document.getElementById("puzzleProgress").textContent =
+    "PHOTO " + (currentPuzzle + 1) + " SUR 3";
+  document.getElementById("puzzleMessage").textContent =
+    "Choisis deux pièces pour les échanger.";
+
+  board.innerHTML = "";
+  board.style.gridTemplateColumns = "repeat(3, minmax(0, 1fr))";
+
+  const cols = 3;
+  const rows = Math.max(4, Math.round(cols / (photo.width / photo.height)));
+  const total = cols * rows;
+  const positions = Array.from({ length: total }, (_, i) => i);
+
+  do {
+    for (let i = positions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [positions[i], positions[j]] = [positions[j], positions[i]];
+    }
+  } while (positions.every((piece, slot) => piece === slot));
+
+  puzzlePieces = positions;
+  board.style.aspectRatio = cols + " / " + rows;
+
+  positions.forEach((pieceIndex, slotIndex) => {
+    const piece = document.createElement("button");
+    piece.type = "button";
+    piece.className = "puzzle-piece";
+    piece.setAttribute("aria-label", "Pièce " + (slotIndex + 1));
+    piece.dataset.slot = String(slotIndex);
+    piece.style.backgroundImage = "url('" + photo.src + "')";
+    piece.style.backgroundSize = (cols * 100) + "% " + (rows * 100) + "%";
+
+    const originalCol = pieceIndex % cols;
+    const originalRow = Math.floor(pieceIndex / cols);
+
+    piece.style.backgroundPosition =
+      (originalCol / (cols - 1) * 100) + "% " +
+      (originalRow / (rows - 1) * 100) + "%";
+
+    piece.addEventListener("click", () => selectPuzzlePiece(slotIndex));
+    board.appendChild(piece);
+  });
+}
+
+function selectPuzzlePiece(slotIndex) {
+  if (puzzleSolved) return;
+
+  const board = document.getElementById("puzzleBoard");
+  const pieces = Array.from(board.querySelectorAll(".puzzle-piece"));
+
+  if (selectedPieceSlot === null) {
+    selectedPieceSlot = slotIndex;
+    pieces[slotIndex].classList.add("selected");
+    document.getElementById("puzzleMessage").textContent =
+      "Maintenant, choisis la pièce avec laquelle l’échanger.";
+    return;
+  }
+
+  if (selectedPieceSlot === slotIndex) {
+    pieces[slotIndex].classList.remove("selected");
+    selectedPieceSlot = null;
+    document.getElementById("puzzleMessage").textContent =
+      "Choisis deux pièces pour les échanger.";
+    return;
+  }
+
+  const first = selectedPieceSlot;
+  [puzzlePieces[first], puzzlePieces[slotIndex]] =
+    [puzzlePieces[slotIndex], puzzlePieces[first]];
+
+  selectedPieceSlot = null;
+  renderPuzzlePieces();
+
+  if (puzzlePieces.every((piece, slot) => piece === slot)) {
+    puzzleSolved = true;
+    document.getElementById("puzzleMessage").textContent =
+      "Photo reconstituée ! Bien joué. ♡";
+    document.getElementById("puzzleNextButton").hidden = false;
+    document.getElementById("puzzleNextButton").textContent =
+      currentPuzzle === 2 ? "Terminer l’aventure" : "Photo suivante";
+  } else {
+    document.getElementById("puzzleMessage").textContent =
+      "Bien ! Continue jusqu’à reconstituer la photo.";
+  }
+}
+
+function renderPuzzlePieces() {
+  const board = document.getElementById("puzzleBoard");
+  const cols = 3;
+  const rows = puzzlePieces.length / cols;
+
+  Array.from(board.querySelectorAll(".puzzle-piece")).forEach((piece, slotIndex) => {
+    const pieceIndex = puzzlePieces[slotIndex];
+    const originalCol = pieceIndex % cols;
+    const originalRow = Math.floor(pieceIndex / cols);
+
+    piece.style.backgroundPosition =
+      (originalCol / (cols - 1) * 100) + "% " +
+      (originalRow / (rows - 1) * 100) + "%";
+
+    piece.classList.remove("selected");
+    piece.setAttribute("aria-label", "Pièce " + (slotIndex + 1));
+  });
+}
+
+function shuffleCurrentPuzzle() {
+  if (puzzleSolved) return;
+  loadPuzzle();
+}
+
+function advancePuzzle() {
+  if (!puzzleSolved) return;
+  if (currentPuzzle < puzzlePhotos.length - 1) {
+    currentPuzzle++;
+    loadPuzzle();
+  } else {
+    showPage("puzzleFinal");
   }
 }
 </script>
