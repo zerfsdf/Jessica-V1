@@ -2,487 +2,194 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Une aventure pour Jessica</title>
-
-  <style>
-    :root {
-      --fond: #111113;
-      --surface: #1c1b20;
-      --blanc: #f5f0ed;
-      --rose: #d9a6b0;
-      --rouge: #bd5967;
-      --texte-doux: #bdb5b5;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      background:
-        radial-gradient(ellipse at top, #302126 0%, transparent 55%),
-        var(--fond);
-      color: var(--blanc);
-    }
-
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .page {
-      display: none;
-      min-height: 100vh;
-      padding: 35px 20px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page.active {
-      display: flex;
-      animation: apparition 0.45s ease;
-    }
-
-    .contenu {
-      width: 100%;
-      max-width: 720px;
-      text-align: center;
-      margin: auto;
-    }
-
-    .surtitre {
-      color: var(--rose);
-      font: 12px Arial, sans-serif;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: clamp(38px, 8vw, 68px);
-      line-height: 1.08;
-      font-weight: normal;
-      margin: 0 0 24px;
-    }
-
-    h2 {
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: normal;
-      margin: 0 0 22px;
-    }
-
-    p {
-      color: var(--texte-doux);
-      font: 16px/1.8 Arial, sans-serif;
-    }
-
-    .intro {
-      max-width: 470px;
-      margin: 0 auto 35px;
-    }
-
-    .ornement {
-      color: var(--rouge);
-      font-size: 35px;
-      margin-bottom: 25px;
-    }
-
-    .bouton {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 24px;
-      border: 1px solid var(--rose);
-      border-radius: 40px;
-      background: var(--rose);
-      color: #191417;
-      font: bold 14px Arial, sans-serif;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .bouton:hover {
-      transform: translateY(-2px);
-      background: #edc5cc;
-    }
-
-    .bouton-secondaire {
-      background: transparent;
-      color: var(--blanc);
-      border-color: #514148;
-      margin-top: 12px;
-    }
-
-    .carte {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 30px;
-      border: 1px solid #403039;
-      border-radius: 20px;
-      background: rgba(28, 27, 32, 0.9);
-      text-align: left;
-    }
-
-    .regle {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      margin: 22px 0;
-    }
-
-    .numero {
-      flex: 0 0 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: var(--rose);
-      border: 1px solid #76505c;
-      font: 14px Arial, sans-serif;
-    }
-
-    .regle strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 17px;
-      font-weight: normal;
-    }
-
-    .regle p {
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .objets {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 30px 0;
-    }
-
-    .objet {
-      min-height: 115px;
-      border-radius: 16px;
-      border: 1px solid #45313a;
-      background: var(--surface);
-      color: var(--blanc);
-      font-size: 35px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .objet:hover {
-      transform: translateY(-4px);
-      border-color: var(--rose);
-    }
-
-    .objet small {
-      display: block;
-      margin-top: 10px;
-      font: 11px Arial, sans-serif;
-      color: var(--texte-doux);
-    }
-
-    .objet.trouve {
-      border-color: #9ebaa3;
-      background: #202a24;
-    }
-
-    .code {
-      color: var(--rose);
-      font-size: 28px;
-      letter-spacing: 8px;
-      min-height: 42px;
-      margin: 15px 0;
-    }
-
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 14px;
-      margin: 12px 0;
-      border: 1px solid #57434c;
-      border-radius: 10px;
-      outline: none;
-      background: #171619;
-      color: white;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-    }
-
-    input:focus {
-      border-color: var(--rose);
-    }
-
-    .message {
-      min-height: 25px;
-      font-size: 14px;
-      color: var(--rose);
-    }
-
-    .petit {
-      font-size: 12px;
-      color: #8e858a;
-    }
-
-    @keyframes apparition {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 420px) {
-      .objets {
-        gap: 8px;
-      }
-
-      .objet {
-        min-height: 95px;
-        font-size: 29px;
-      }
-
-      .carte {
-        padding: 22px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jessica — Un petit jeu pour toi</title>
+<style>
+:root{--bg:#100e11;--text:#fff8f8;--muted:#c2b5bd;--rose:#e9a2b2;--border:#49333d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 10%,#39212d,transparent 38%),radial-gradient(ellipse at 90% 85%,#26171e,transparent 35%),var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif}
+button,input{font:inherit}button{cursor:pointer}
+.page{display:none;min-height:100vh;padding:38px 22px;align-items:center;justify-content:center}
+.page.active{display:flex;animation:appear .4s ease}
+.content{width:100%;max-width:850px;margin:auto;text-align:center}
+.eyebrow{color:var(--rose);text-transform:uppercase;letter-spacing:3px;font:11px Arial,sans-serif;margin-bottom:20px}
+h1{font-size:clamp(36px,7vw,62px);line-height:1.12;font-weight:normal;margin:0 0 22px}
+h2{font-size:clamp(29px,5vw,42px);font-weight:normal;margin:0 0 20px}
+p{color:var(--muted);font-size:17px;line-height:1.8}
+.intro{max-width:540px;margin:0 auto 28px}
+.decorations{display:flex;justify-content:center;align-items:center;gap:28px;margin:24px 0;color:var(--rose)}
+.decorations span:nth-child(1){font-size:24px;transform:rotate(-18deg)}
+.decorations span:nth-child(2){font-size:37px}
+.decorations span:nth-child(3){font-size:21px;transform:rotate(15deg)}
+.button{border:1px solid var(--rose);background:var(--rose);color:#24131a;padding:15px 27px;border-radius:30px;font-size:15px;transition:.2s}
+.button:hover{transform:translateY(-2px);background:#f5bdca}
+.button.secondary{background:transparent;color:var(--text);border-color:var(--border)}
+.rules-card{max-width:600px;margin:25px auto;padding:26px;background:#1b171cdd;border:1px solid var(--border);border-radius:20px;text-align:left}
+.rules-card p{margin:10px 0}
+.game-intro{max-width:620px;margin:0 auto 25px}
+.game-board{position:relative;width:100%;min-height:610px;margin:25px auto;border:1px solid var(--border);border-radius:25px;overflow:hidden;background:radial-gradient(ellipse at center,#30212a,#19151a 70%)}
+.game-item{position:absolute;width:125px;min-height:125px;padding:12px 5px;border:1px solid transparent;border-radius:17px;background:#ffffff08;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;transition:background .2s,border-color .2s,transform .2s}
+.game-item:hover{background:#e9a2b218;border-color:#e9a2b255}
+.emoji{font:39px/1.2 Arial,sans-serif}
+.item-name{font:12px Arial,sans-serif;color:#e8dbe1}
+.result{display:none;max-width:115px;color:var(--rose);font:13px/1.5 Arial,sans-serif;overflow-wrap:anywhere}
+.game-item.found{background:#e9a2b20b;border-color:#e9a2b233;cursor:default}
+.game-item.found .emoji{display:none}
+.game-item.found .result{display:block}
+.game-item.found .item-name{color:var(--rose)}
+.code-panel{max-width:450px;margin:30px auto 0;padding:25px;border:1px solid var(--border);background:#1b171cdd;border-radius:20px}
+.code-panel p{margin-top:0;font-size:15px}
+.code-entry{display:flex;gap:9px;margin-top:18px}
+.code-entry input{min-width:0;width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:13px;text-align:center;letter-spacing:3px;outline:none}
+.code-entry input:focus{border-color:var(--rose)}
+.feedback{min-height:24px;margin-top:13px;font:13px Arial,sans-serif;color:var(--rose)}
+.footer-note{margin-top:25px;font:11px Arial,sans-serif;letter-spacing:1px;color:#9e8d97}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){
+.page{padding:28px 14px}
+.game-board{min-height:auto;padding:20px 8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;overflow:visible}
+.game-item{position:relative;inset:auto!important;width:100%;min-height:125px;transform:none!important}
+.game-item:hover{transform:translateY(-2px)!important}
+.code-entry{flex-direction:column}
+.code-entry .button{width:100%}
+}
+@media(max-width:360px){.emoji{font-size:33px}.item-name{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
 <body>
 
-  <!-- PAGE 1 : ACCUEIL -->
-  <section class="page active" id="accueil">
-    <div class="contenu">
-      <div class="surtitre">Une petite aventure rien que pour toi</div>
-      <div class="ornement">✳</div>
-      <h1>Jessica,<br>à toi de jouer.</h1>
-      <p class="intro">
-        J'ai préparé quelque chose pour toi.
-        Quelques mystères, quelques souvenirs et une surprise
-        qui t'attend au bout du chemin.
-      </p>
-      <button class="bouton" onclick="allerA('regles')">
-        Commencer l'aventure <span>♥</span>
-      </button>
-      <p class="petit" style="margin-top: 35px;">
-        Prends ton temps. Chaque détail compte.
-      </p>
-    </div>
-  </section>
+<section class="page active" id="home">
+<main class="content">
+<div class="eyebrow">Une petite aventure rien que pour toi</div>
+<h1>Jessica,<br>un petit jeu pour toi.</h1>
+<div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
+<p class="intro">Prends ton temps, chaque détail compte.</p>
+<button class="button" onclick="showPage('rules')">Commencer l'aventure</button>
+<div class="footer-note">RIEN N'EST LÀ PAR HASARD</div>
+</main>
+</section>
 
-  <!-- PAGE 2 : RÈGLES -->
-  <section class="page" id="regles">
-    <div class="contenu">
-      <div class="surtitre">Avant de commencer</div>
-      <h2>Quelques petites règles</h2>
-      <p class="intro">
-        Pour arriver jusqu'à la fin, il va falloir observer,
-        chercher et peut-être te souvenir de certaines choses.
-      </p>
+<section class="page" id="rules">
+<main class="content">
+<div class="eyebrow">Avant de commencer</div>
+<h2>Quelques petites règles</h2>
+<div class="rules-card">
+<p>✿ Ouvre bien les yeux et explore la page.</p>
+<p>✿ Clique sur les objets pour découvrir ce qu'ils cachent.</p>
+<p>✿ Certains objets ont quelque chose à révéler, d'autres non.</p>
+<p>✿ Garde les informations que tu trouves : elles pourraient servir plus tard.</p>
+</div>
+<button class="button" onclick="showPage('game')">Découvrir le jeu</button>
+<p class="footer-note">LES RÈGLES POURRONT CHANGER POUR LES PROCHAINS JEUX</p>
+</main>
+</section>
 
-      <div class="carte">
-        <div class="regle">
-          <div class="numero">1</div>
-          <div>
-            <strong>Ouvre l'œil</strong>
-            <p>Certains objets cachent quelque chose. Clique dessus pour le découvrir.</p>
-          </div>
-        </div>
+<section class="page" id="game">
+<main class="content">
+<div class="eyebrow">Jeu numéro 1</div>
+<h2>À toi d'explorer.</h2>
+<p class="game-intro">Clique sur les objets pour découvrir ce qu'ils cachent. Certains indices sont utiles, d'autres sont des fausses pistes.</p>
 
-        <div class="regle">
-          <div class="numero">2</div>
-          <div>
-            <strong>Récupère les indices</strong>
-            <p>Les bons objets te donneront des lettres. Garde-les précieusement.</p>
-          </div>
-        </div>
+<div class="game-board">
+<button class="game-item" style="left:5%;top:5%;transform:rotate(-8deg)" data-item="09" onclick="reveal(this)">
+<span class="emoji">🌸</span><span class="item-name">Fleur</span><span class="result"></span></button>
 
-        <div class="regle">
-          <div class="numero">3</div>
-          <div>
-            <strong>Trouve le code</strong>
-            <p>Les lettres récupérées te permettront de débloquer la suite de l'aventure.</p>
-          </div>
-        </div>
+<button class="game-item" style="left:37%;top:3%;transform:rotate(5deg)" data-item="11" onclick="reveal(this)">
+<span class="emoji">💍</span><span class="item-name">Bague</span><span class="result"></span></button>
 
-        <div class="regle">
-          <div class="numero">4</div>
-          <div>
-            <strong>Va jusqu'au bout</strong>
-            <p>Plusieurs petites épreuves t'attendent avant la surprise finale.</p>
-          </div>
-        </div>
-      </div>
+<button class="game-item" style="left:70%;top:8%;transform:rotate(8deg)" data-item="24" onclick="reveal(this)">
+<span class="emoji">✈️</span><span class="item-name">Rafale</span><span class="result"></span></button>
 
-      <button class="bouton" onclick="allerA('jeu1')">
-        C'est parti <span>→</span>
-      </button>
-    </div>
-  </section>
+<button class="game-item" style="left:18%;top:37%;transform:rotate(6deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🥔</span><span class="item-name">Patate</span><span class="result"></span></button>
 
-  <!-- PAGE 3 : PREMIER JEU -->
-  <section class="page" id="jeu1">
-    <div class="contenu">
-      <div class="surtitre">Épreuve numéro 1</div>
-      <h2>Les objets mystérieux</h2>
-      <p class="intro">
-        Six objets se trouvent devant toi.
-        Certains cachent une lettre. À toi de découvrir lesquels.
-      </p>
+<button class="game-item" style="left:54%;top:34%;transform:rotate(-5deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🌊</span><span class="item-name">Mer</span><span class="result"></span></button>
 
-      <div class="objets" id="objets">
-        <button class="objet" data-id="0" onclick="cliquerObjet(0)" aria-label="Examiner la clé">
-          🗝️<small>La clé</small>
-        </button>
-        <button class="objet" data-id="1" onclick="cliquerObjet(1)" aria-label="Examiner le livre">
-          📖<small>Le livre</small>
-        </button>
-        <button class="objet" data-id="2" onclick="cliquerObjet(2)" aria-label="Examiner la fleur">
-          🌷<small>La fleur</small>
-        </button>
-        <button class="objet" data-id="3" onclick="cliquerObjet(3)" aria-label="Examiner la lune">
-          🌙<small>La lune</small>
-        </button>
-        <button class="objet" data-id="4" onclick="cliquerObjet(4)" aria-label="Examiner l'appareil photo">
-          📷<small>La photo</small>
-        </button>
-        <button class="objet" data-id="5" onclick="cliquerObjet(5)" aria-label="Examiner le cadeau">
-          🎁<small>Le cadeau</small>
-        </button>
-      </div>
+<button class="game-item" style="left:76%;top:43%;transform:rotate(7deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">❤️</span><span class="item-name">Cœur</span><span class="result"></span></button>
 
-      <p>Les lettres trouvées :</p>
-      <div class="code" id="lettres">_ _ _</div>
-      <p id="indice" class="message" aria-live="polite">
-        Trois lettres sont cachées parmi les objets.
-      </p>
+<button class="game-item" style="left:4%;top:69%;transform:rotate(4deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🏎️</span><span class="item-name">Porsche</span><span class="result"></span></button>
 
-      <div style="margin-top: 25px;">
-        <p>Quand tu penses avoir trouvé, entre le code :</p>
-        <input id="saisieCode" type="text" maxlength="3"
-          placeholder="CODE" autocomplete="off" aria-label="Code secret">
-        <br>
-        <button class="bouton" onclick="verifierCode()">Valider le code</button>
-        <p id="erreurCode" class="message" aria-live="polite"></p>
-      </div>
+<button class="game-item" style="left:32%;top:70%;transform:rotate(-7deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🕶️</span><span class="item-name">Top Gun</span><span class="result"></span></button>
 
-      <button class="bouton bouton-secondaire" onclick="allerA('regles')">
-        Revoir les règles
-      </button>
-    </div>
-  </section>
+<button class="game-item" style="left:58%;top:73%;transform:rotate(6deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🃏</span><span class="item-name">Balatro</span><span class="result"></span></button>
 
-  <!-- PAGE 4 : PROVISOIRE -->
-  <section class="page" id="suite">
-    <div class="contenu">
-      <div class="surtitre">Première épreuve terminée</div>
-      <h1>Bien joué, Jessica.</h1>
-      <p class="intro">
-        Tu as trouvé le premier code.
-        La suite de l'aventure sera bientôt prête.
-      </p>
-      <div class="ornement">✳</div>
-      <p class="petit">La prochaine étape reste à inventer ensemble.</p>
-    </div>
-  </section>
+<button class="game-item" style="left:77%;top:72%;transform:rotate(-4deg)" data-item="empty" onclick="reveal(this)">
+<span class="emoji">🎵</span><span class="item-name">The Weeknd</span><span class="result"></span></button>
+</div>
 
-  <script>
-    // Navigation entre les différentes pages
-    function allerA(id) {
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
+<div class="code-panel">
+<p>Tu as trouvé trois morceaux de date ? Remets-les dans le bon ordre.</p>
+<div class="code-entry">
+<input type="text" id="secretCode" placeholder="JJ MM AA" aria-label="Entre la date découverte" autocomplete="off" maxlength="8">
+<button class="button" onclick="checkCode()">Valider</button>
+</div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+</div>
 
-      document.getElementById(id).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+<button class="button secondary" style="margin-top:20px" onclick="showPage('rules')">Retour aux règles</button>
+</main>
+</section>
 
-    // Les trois objets qui cachent une lettre.
-    // Le code provisoire est : L U N
-    const indices = {
-      0: { lettre: 'L', message: 'Une première lettre : L.' },
-      2: { lettre: 'U', message: 'Une deuxième lettre : U.' },
-      3: { lettre: 'N', message: 'Une troisième lettre : N.' }
-    };
+<section class="page" id="next">
+<main class="content">
+<div class="eyebrow">Première étape terminée</div>
+<h2>Bien joué, Jessica.</h2>
+<div class="decorations" aria-hidden="true"><span>✿</span><span>♡</span><span>❀</span></div>
+<p class="intro">Tu as découvert le premier secret. La suite de l'aventure reste à découvrir…</p>
+<button class="button secondary" onclick="showPage('game')">Revoir le jeu</button>
+</main>
+</section>
 
-    const trouves = new Set();
+<script>
+function showPage(pageId){
+  document.querySelectorAll(".page").forEach(page=>page.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-    function cliquerObjet(id) {
-      const bouton = document.querySelector(
-        '.objet[data-id="' + id + '"]'
-      );
-      const indice = indices[id];
+function reveal(item){
+  if(item.classList.contains("found")) return;
+  const result=item.querySelector(".result");
+  if(item.dataset.item==="empty"){
+    result.textContent="Il n'y a rien à trouver ici.";
+  }else{
+    result.textContent=item.dataset.item;
+  }
+  item.classList.add("found");
+}
 
-      if (!indice) {
-        document.getElementById('indice').textContent =
-          'Rien ici... Essaie un autre objet.';
-        return;
-      }
+function checkCode(){
+  const input=document.getElementById("secretCode");
+  const feedback=document.getElementById("feedback");
+  const digits=input.value.replace(/\D/g,"");
 
-      if (trouves.has(id)) {
-        document.getElementById('indice').textContent =
-          'Tu as déjà trouvé cette lettre !';
-        return;
-      }
+  const foundParts=[...document.querySelectorAll(".game-item.found")]
+    .map(item=>item.dataset.item)
+    .filter(value=>value==="09"||value==="11"||value==="24");
 
-      trouves.add(id);
-      bouton.classList.add('trouve');
-      bouton.querySelector('small').textContent = indice.lettre;
+  if(foundParts.length<3){
+    feedback.textContent="Explore les objets et trouve les trois morceaux de date.";
+    return;
+  }
 
-      document.getElementById('lettres').textContent =
-        Array.from(trouves)
-          .map(numero => indices[numero].lettre)
-          .join('  ');
+  if(digits==="091124"){
+    feedback.textContent="Bonne réponse.";
+    showPage("next");
+  }else{
+    feedback.textContent="Ce n'est pas la bonne date. Remets les indices dans le bon ordre.";
+  }
+}
 
-      document.getElementById('indice').textContent = indice.message;
-
-      if (trouves.size === 3) {
-        document.getElementById('indice').textContent =
-          'Tu as trouvé les trois lettres. Remets-les dans le bon ordre !';
-      }
-    }
-
-    function verifierCode() {
-      const code = document.getElementById('saisieCode')
-        .value.trim().toUpperCase();
-
-      const message = document.getElementById('erreurCode');
-
-      if (trouves.size !== 3) {
-        message.textContent =
-          'Explore les objets et récupère les trois lettres avant de continuer.';
-        return;
-      }
-
-      if (code === 'LUN') {
-        allerA('suite');
-      } else {
-        message.textContent =
-          'Ce n’est pas le bon code. Essaie un autre ordre de lettres.';
-      }
-    }
-
-    document.getElementById('saisieCode').addEventListener(
-      'keydown',
-      function(e) {
-        if (e.key === 'Enter') verifierCode();
-      }
-    );
-  </script>
-
+document.getElementById("secretCode").addEventListener("keydown",event=>{
+  if(event.key==="Enter") checkCode();
+});
+</script>
 </body>
 </html>
