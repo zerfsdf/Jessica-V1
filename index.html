@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -142,7 +141,7 @@ p {
   margin: 0 auto 12px;
 }
 
-/* JEU NUMÉRO 1 */
+/* Objets dispersés */
 
 .game-board {
   position: relative;
@@ -300,7 +299,51 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* JEU NUMÉRO 2 : QUIZ DES LIEUX */
+@media (max-width: 700px) {
+  .page { padding: 28px 16px; }
+
+  .game-board {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 8px;
+    margin-top: 22px;
+  }
+
+  .game-board::before { display: none; }
+
+  .game-item {
+    position: relative;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100%;
+    min-height: 132px;
+    transform: none !important;
+  }
+
+  .visual { width: 76px; height: 76px; }
+
+  .game-item:hover { transform: translateY(-2px) !important; }
+
+  .code-entry { flex-direction: column; }
+
+  .code-entry .button { width: 100%; }
+}
+
+@media (max-width: 360px) {
+  .emoji { font-size: 42px; }
+  .item-name { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* JEU NUMÉRO 2 : quiz des lieux */
 
 .quiz-list {
   max-width: 720px;
@@ -359,57 +402,15 @@ p {
   font: 14px Arial, sans-serif;
 }
 
-@media (max-width: 700px) {
-  .page { padding: 28px 16px; }
-
-  .game-board {
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px 8px;
-    margin-top: 22px;
-  }
-
-  .game-board::before { display: none; }
-
-  .game-item {
-    position: relative;
-    inset: auto !important;
-    left: auto !important;
-    top: auto !important;
-    width: 100%;
-    min-height: 132px;
-    transform: none !important;
-  }
-
-  .visual { width: 76px; height: 76px; }
-
-  .game-item:hover { transform: translateY(-2px) !important; }
-
-  .code-entry { flex-direction: column; }
-
-  .code-entry .button { width: 100%; }
-
+@media (max-width: 600px) {
   .quiz-list { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 360px) {
-  .emoji { font-size: 42px; }
-  .item-name { font-size: 11px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE D'ACCUEIL : CONSERVÉE -->
+<!-- PAGE D'ACCUEIL -->
 
 <section class="page active" id="home">
   <main class="content">
@@ -431,7 +432,7 @@ p {
   </main>
 </section>
 
-<!-- RÈGLES : CONSERVÉES -->
+<!-- PAGE DES RÈGLES -->
 
 <section class="page" id="rules">
   <main class="content">
@@ -454,7 +455,7 @@ p {
   </main>
 </section>
 
-<!-- JEU NUMÉRO 1 : CONSERVÉ -->
+<!-- JEU NUMÉRO 1 -->
 
 <section class="page" id="game">
   <main class="content">
@@ -471,7 +472,9 @@ p {
 
       <button class="game-item"
         style="left:5%;top:3%;transform:rotate(-8deg)"
-        data-item="09" data-found="false" type="button"
+        data-item="09"
+        data-found="false"
+        type="button"
         onclick="reveal(this)"
         aria-label="Fleur, afficher ou masquer l'indice">
         <span class="visual">
@@ -483,7 +486,9 @@ p {
 
       <button class="game-item"
         style="left:37%;top:0%;transform:rotate(5deg)"
-        data-item="11" data-found="false" type="button"
+        data-item="11"
+        data-found="false"
+        type="button"
         onclick="reveal(this)"
         aria-label="Bague, afficher ou masquer l'indice">
         <span class="visual">
@@ -495,7 +500,9 @@ p {
 
       <button class="game-item"
         style="left:72%;top:7%;transform:rotate(8deg)"
-        data-item="24" data-found="false" type="button"
+        data-item="24"
+        data-found="false"
+        type="button"
         onclick="reveal(this)"
         aria-label="Rafale, afficher ou masquer l'indice">
         <span class="visual">
@@ -507,8 +514,11 @@ p {
 
       <button class="game-item"
         style="left:20%;top:32%;transform:rotate(4deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Patate, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Patate, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🥔</span></span>
           <span class="clue"></span>
@@ -518,8 +528,11 @@ p {
 
       <button class="game-item"
         style="left:53%;top:34%;transform:rotate(-5deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Mer, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Mer, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🌊</span></span>
           <span class="clue"></span>
@@ -529,8 +542,11 @@ p {
 
       <button class="game-item"
         style="left:2%;top:66%;transform:rotate(-6deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Cœur, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Cœur, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">❤️</span></span>
           <span class="clue"></span>
@@ -540,8 +556,11 @@ p {
 
       <button class="game-item"
         style="left:34%;top:73%;transform:rotate(6deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Porsche, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Porsche, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🏎️</span></span>
           <span class="clue"></span>
@@ -551,8 +570,11 @@ p {
 
       <button class="game-item"
         style="left:68%;top:69%;transform:rotate(-4deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Top Gun, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Top Gun, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🕶️</span></span>
           <span class="clue"></span>
@@ -562,8 +584,11 @@ p {
 
       <button class="game-item"
         style="left:1%;top:38%;transform:rotate(7deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="Balatro, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="Balatro, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🃏</span></span>
           <span class="clue"></span>
@@ -573,8 +598,11 @@ p {
 
       <button class="game-item"
         style="left:77%;top:39%;transform:rotate(5deg)"
-        data-item="" data-found="false" type="button"
-        onclick="reveal(this)" aria-label="The Weeknd, afficher ou masquer">
+        data-item=""
+        data-found="false"
+        type="button"
+        onclick="reveal(this)"
+        aria-label="The Weeknd, afficher ou masquer">
         <span class="visual">
           <span class="face"><span class="emoji">🎵</span></span>
           <span class="clue"></span>
@@ -591,9 +619,17 @@ p {
       </p>
 
       <form class="code-entry" onsubmit="checkCode(event)">
-        <input id="codeInput" type="text" inputmode="numeric"
-          autocomplete="off" placeholder="JJ / MM / AA"
-          aria-label="Entre la date découverte" maxlength="10" required>
+        <input
+          id="codeInput"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="JJ / MM / AA"
+          aria-label="Entre la date découverte"
+          maxlength="10"
+          required
+        >
+
         <button class="button" type="submit">Valider</button>
       </form>
 
@@ -601,7 +637,8 @@ p {
     </div>
 
     <button class="button secondary" type="button"
-      style="margin-top:18px" onclick="showPage('rules')">
+      style="margin-top:18px"
+      onclick="showPage('rules')">
       Revoir les règles
     </button>
 
@@ -609,7 +646,7 @@ p {
   </main>
 </section>
 
-<!-- PAGE APRÈS LE JEU 1 -->
+<!-- PAGE SUIVANTE -->
 
 <section class="page" id="next">
   <main class="content">
@@ -641,18 +678,17 @@ p {
     <h2>Nos lieux, nos souvenirs.</h2>
 
     <p class="game-intro">
-      Pour chaque lieu, choisis si nous y sommes déjà allés
-      ou si c'est un endroit où nous prévoyons d'aller.
+      Pour chaque lieu, choisis si nous y sommes déjà allés ou si c'est un endroit où nous prévoyons d'aller.
     </p>
 
     <form id="placesQuiz" onsubmit="checkPlacesQuiz(event)">
       <div class="quiz-list">
 
         <article class="quiz-place">
-          <h3>🇮🇹 Italie</h3>
+          <h3>🍝 Italie</h3>
           <div class="quiz-options">
             <label><input type="radio" name="italie" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="italie" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="italie" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -660,7 +696,7 @@ p {
           <h3>🌊 Biarritz</h3>
           <div class="quiz-options">
             <label><input type="radio" name="biarritz" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="biarritz" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="biarritz" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -668,7 +704,7 @@ p {
           <h3>🏄 Hossegor</h3>
           <div class="quiz-options">
             <label><input type="radio" name="hossegor" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="hossegor" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="hossegor" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -676,15 +712,15 @@ p {
           <h3>🌙 La Lune</h3>
           <div class="quiz-options">
             <label><input type="radio" name="lune" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="lune" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="lune" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
         <article class="quiz-place">
-          <h3>🌴 Le Kerala</h3>
+          <h3>🏔️ Le Queyras</h3>
           <div class="quiz-options">
-            <label><input type="radio" name="kerala" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="kerala" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="queyras" value="oui" required> On y est allés</label>
+            <label><input type="radio" name="queyras" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -692,7 +728,7 @@ p {
           <h3>🌴 Miami</h3>
           <div class="quiz-options">
             <label><input type="radio" name="miami" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="miami" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="miami" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -700,7 +736,7 @@ p {
           <h3>☀️ Nice</h3>
           <div class="quiz-options">
             <label><input type="radio" name="nice" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="nice" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="nice" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -708,7 +744,7 @@ p {
           <h3>🗾 Japon</h3>
           <div class="quiz-options">
             <label><input type="radio" name="japon" value="oui" required> On y est allés</label>
-            <label><input type="radio" name="japon" value="non"> On n'y est pas allés</label>
+            <label><input type="radio" name="japon" value="non"> On n'y est pas encore allé</label>
           </div>
         </article>
 
@@ -722,12 +758,11 @@ p {
   </main>
 </section>
 
-<!-- PAGE APRÈS LE JEU 2 -->
+<!-- PAGE APRÈS LE JEU NUMÉRO 2 -->
 
 <section class="page" id="quiz2next">
   <main class="content">
     <div class="eyebrow">Deuxième étape terminée</div>
-
     <h2>Tu connais bien nos aventures.</h2>
 
     <div class="decorations" aria-hidden="true">
@@ -735,7 +770,6 @@ p {
     </div>
 
     <p class="intro">Tout est juste. Tu peux passer à la suite...</p>
-
     <div class="footer-note">LA SUITE ARRIVE BIENTÔT</div>
   </main>
 </section>
@@ -746,6 +780,7 @@ p {
 "use strict";
 
 /* Navigation entre les pages */
+
 function showPage(pageId) {
   const target = document.getElementById(pageId);
 
@@ -763,6 +798,7 @@ function showPage(pageId) {
 }
 
 /* Affichage et masquage des indices */
+
 function reveal(button) {
   const isRevealed = button.classList.toggle("revealed");
   const clue = button.querySelector(".clue");
@@ -783,11 +819,13 @@ function reveal(button) {
 }
 
 /* Vérification de la date */
+
 function checkCode(event) {
   event.preventDefault();
 
   const input = document.getElementById("codeInput");
   const feedback = document.getElementById("feedback");
+
   const digits = input.value.replace(/\D/g, "");
 
   const clues = Array.from(
@@ -819,6 +857,7 @@ function checkCode(event) {
 }
 
 /* Vérification du quiz numéro 2 */
+
 function checkPlacesQuiz(event) {
   event.preventDefault();
 
@@ -827,7 +866,7 @@ function checkPlacesQuiz(event) {
     biarritz: "oui",
     hossegor: "oui",
     lune: "non",
-    kerala: "oui",
+    queyras: "oui",
     miami: "non",
     nice: "oui",
     japon: "non"
@@ -849,8 +888,7 @@ function checkPlacesQuiz(event) {
       showPage("quiz2next");
     }, 800);
   } else {
-    feedback.textContent =
-      "Tu as " + correct + "/8 bonnes réponses. Réessaie !";
+    feedback.textContent = "Tu as " + correct + "/8 bonnes réponses. Réessaie !";
   }
 }
 </script>
